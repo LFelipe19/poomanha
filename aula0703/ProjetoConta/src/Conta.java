@@ -13,8 +13,12 @@ public class Conta {
         }
         return false;
     }
-    public void depositar(double valor){
-        saldo += valor;
+    public boolean depositar(double valor){
+        if(valor > 0){
+            saldo += valor;
+            return true;
+        }
+        return false;
     }
     public void imprimir(){
         System.out.println("conta = " + conta);

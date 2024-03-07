@@ -72,7 +72,11 @@ public class ContaTeste {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Digite o valor do depósito: ");
         double valorDeposito = Double.parseDouble(scanner.nextLine());
-        cc.depositar(valorDeposito);
-        System.out.println("Depósito efetuado com sucesso");
+        boolean depositou = cc.depositar(valorDeposito);
+        if(depositou) {
+            System.out.println("Depósito efetuado com sucesso");
+        }else{
+            System.out.println("Valor indevido para o deposito");
+        }
     }
 }
