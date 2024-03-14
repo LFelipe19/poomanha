@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Tabuleiro {
     private int[][] tabu = new int[10][10];
     private int[] palpites = new int[2];
@@ -24,7 +26,9 @@ public class Tabuleiro {
     }
 
     private void mostrarTabuleiro() {
+
         for(int[] vetor : tabu){
+            Arrays.sort(vetor);
             for(int valor : vetor){
                 if(palpites[0] == valor || palpites[1] == valor){
                     System.out.printf("[ %2d*]", valor);
