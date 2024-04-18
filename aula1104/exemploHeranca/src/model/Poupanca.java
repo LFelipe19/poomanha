@@ -23,4 +23,9 @@ public class Poupanca extends Conta{
         sb.append("dia de Aniversario=").append(diaAninversario).append("\n");
         return sb.toString();
     }
+
+    @Override
+    void cobrarTaxa() {
+        System.out.println("Atualmente nao cobramos taxa de poupanca");
+    }
 }

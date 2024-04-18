@@ -56,4 +56,6 @@ public abstract class Conta {
         sb.append("saldo=").append(saldo).append("\n");
         return sb.toString();
     }
+
+    abstract void cobrarTaxa();
 }

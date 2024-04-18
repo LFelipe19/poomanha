@@ -35,8 +35,14 @@ public class ContaCorrente extends Conta{
     }
 
     @Override
+    void cobrarTaxa() {
+        System.out.println("Avaliando cobrar taxa");
+    }
+
+    @Override
     public void sacar(double valor) {
         if(valor <= (getSaldo() + limite)){
+            cobrarTaxa();
             setSaldo(getSaldo() - valor);
         }
     }
