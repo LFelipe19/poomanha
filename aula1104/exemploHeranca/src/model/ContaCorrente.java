@@ -1,0 +1,43 @@
+package model;
+
+public class ContaCorrente extends Conta{
+    private boolean temLimite;
+    private double limite;
+
+    public ContaCorrente(int numero, String nomeCliente, boolean temLimite, double limite) {
+        super(numero, nomeCliente);
+        this.temLimite = temLimite;
+        this.limite = limite;
+    }
+
+    public boolean getTemLimite() {
+        return temLimite;
+    }
+
+    public void setTemLimite(boolean temLimite) {
+        this.temLimite = temLimite;
+    }
+
+    public double getLimite() {
+        return limite;
+    }
+
+    public void setLimite(double limite) {
+        this.limite = limite;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb= new StringBuilder();
+        sb.append(super.toString());
+        sb.append("Valor Limite=").append(limite).append("\n");
+        return sb.toString();
+    }
+
+    @Override
+    public void sacar(double valor) {
+        if(valor <= (getSaldo() + limite)){
+            setSaldo(getSaldo() - valor);
+        }
+    }
+}
