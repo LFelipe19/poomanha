@@ -24,6 +24,8 @@ public class Gerenciar {
             System.out.println("4. Listar Todas as Contas");
             System.out.println("5. Exibir Saldo");
             System.out.println("6. Total Acumulado das Contas");
+            System.out.println("7. Depositar");
+            System.out.println("8. Sacar");
             System.out.println("9. Finalizar");
             opcao = Integer.parseInt(gerenciar.sc.nextLine());
             switch (opcao){
@@ -45,6 +47,12 @@ public class Gerenciar {
                 case 6:
                     gerenciar.execTotalizar();
                     break;
+                case 7:
+                    gerenciar.execDepositar();
+                    break;
+                case 8:
+                    gerenciar.execSacar();
+                    break;
                 case 9:
                     System.out.println("Fim do Programa");
                     break;
@@ -54,17 +62,83 @@ public class Gerenciar {
         }while(opcao !=9);
     }
 
+    private void execSacar() {
+        int numero;
+        System.out.println("Digite o numero da conta a sacar");
+        numero = Integer.parseInt(sc.nextLine());
+        for(Conta conta : listaContas){
+            if(conta.getNumero()==numero){
+                double valor;
+                System.out.println("Digite o valor do saque: ");
+                valor = Double.parseDouble(sc.nextLine());
+                conta.sacar(valor);
+                System.out.println("Operacao terminada");
+                return;
+            }
+        }
+        System.out.println("Não encontrei conta com este numero");
+    }
+
+    private void execDepositar() {
+        int numero;
+        System.out.println("Digite o numero da conta a depositar");
+        numero = Integer.parseInt(sc.nextLine());
+        for(Conta conta : listaContas){
+            if(conta.getNumero()==numero){
+                double valor;
+                System.out.println("Digite o valor do depostio: ");
+                valor = Double.parseDouble(sc.nextLine());
+                conta.depositar(valor);
+                System.out.println("Operacao terminada");
+                return;
+            }
+        }
+        System.out.println("Não encontrei conta com este numero");
+    }
+
     private void execTotalizar() {
+        double total = 0.0;
+        for(Conta conta : listaContas){
+            total += conta.getSaldo();
+        }
+        System.out.println("Total de Saldo acumuldado em todas as " +
+                "contas: " + total);
     }
 
     private void execExibirSaldo() {
+        int numero;
+        System.out.println("Digite o numero da conta a exibir saldo");
+        numero = Integer.parseInt(sc.nextLine());
+        for(Conta conta : listaContas){
+            if(conta.getNumero()==numero){
+                System.out.println("Saldo atual: " + conta.getSaldo());
+                return;
+            }
+        }
+        System.out.println("Não encontrei conta com este numero");
     }
 
     private void execListar() {
+        for(Conta conta : listaContas){
+            System.out.println(conta);
+            System.out.println("----------");
+        }
     }
 
     private void execExcluir() {
+        int numero;
+        System.out.println("Digite o numero da conta a excluir");
+        numero = Integer.parseInt(sc.nextLine());
+        for(Conta conta : listaContas){
+            if(conta.getNumero()==numero){
+                listaContas.remove(conta);
+                System.out.println("Conta excluída com sucesso");
+                return;
+            }
+        }
+        System.out.println("Não encontrei conta com este numero");
     }
+
 
     private void execConsultar() {
         int numero;
