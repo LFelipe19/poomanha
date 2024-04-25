@@ -4,8 +4,10 @@ import model.Caixa;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class TelaMovimento extends JFrame {
+public class TelaMovimento extends JFrame implements ActionListener {
     //Atributos da janela
     private Label lblValor, lblSaldo;
     private TextField txtValor, txtSaldo;
@@ -55,21 +57,25 @@ public class TelaMovimento extends JFrame {
         cmdEntrada = new Button("Entrada");
         cmdEntrada.setSize(dButton);
         cmdEntrada.setLocation(25,150);
+        cmdEntrada.addActionListener(this);
         add(cmdEntrada);
 
         cmdRetirada = new Button("Retirada");
         cmdRetirada.setSize(dButton);
         cmdRetirada.setLocation(225,150);
+        cmdRetirada.addActionListener(this);
         add(cmdRetirada);
 
         cmdConsulta = new Button("Consulta");
         cmdConsulta.setSize(dButton);
         cmdConsulta.setLocation(25,185);
+        cmdConsulta.addActionListener(this);
         add(cmdConsulta);
 
         cmdSair = new Button("Saída");
         cmdSair.setSize(dButton);
         cmdSair.setLocation(225,185);
+        cmdSair.addActionListener(this);
         add(cmdSair);
 
         txtMsg = new TextArea(null);
@@ -77,9 +83,32 @@ public class TelaMovimento extends JFrame {
         txtMsg.setLocation(25,220);
         add(txtMsg);
 
+    }
 
-
-
-
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==cmdSair){
+            System.exit(0);
+        }
+        if(e.getSource()==cmdEntrada){
+            double vlr = Double.parseDouble(txtValor.getText());
+            String resposta = caixa.depositar(vlr);
+            txtMsg.append(resposta + "\n");
+            txtValor.setText(null);
+            txtValor.requestFocus(); //coloca o foco no controle
+            return;
+        }
+        if(e.getSource()==cmdConsulta){
+            txtSaldo.setText(Double.toString(caixa.getSaldo()));
+            txtMsg.append("Saldo no momento: " + txtSaldo.getText());
+            txtMsg.append("\n");
+        }
+        if(e.getSource()==cmdRetirada){
+            double vlr = Double.parseDouble(txtValor.getText());
+            String resposta = caixa.sacar(vlr);
+            txtMsg.append(resposta + "\n");
+            txtValor.setText(null);
+            txtValor.requestFocus(); //coloca o foco no controle
+        }
     }
 }
