@@ -91,11 +91,24 @@ public class TelaMovimento extends JFrame implements ActionListener {
             System.exit(0);
         }
         if(e.getSource()==cmdEntrada){
-            double vlr = Double.parseDouble(txtValor.getText());
-            String resposta = caixa.depositar(vlr);
-            txtMsg.append(resposta + "\n");
-            txtValor.setText(null);
-            txtValor.requestFocus(); //coloca o foco no controle
+            try{
+                String resposta = null;
+                double vlr = Double.parseDouble(txtValor.getText());
+                resposta = caixa.depositar(vlr);
+
+                if(resposta!=null) {
+                    txtMsg.append(resposta + "\n");
+                    txtValor.setText(null);
+                    txtValor.requestFocus(); //coloca o foco no controle
+                }
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(
+                        null,
+                        ex.getMessage(),
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
             return;
         }
         if(e.getSource()==cmdConsulta){
@@ -104,11 +117,24 @@ public class TelaMovimento extends JFrame implements ActionListener {
             txtMsg.append("\n");
         }
         if(e.getSource()==cmdRetirada){
-            double vlr = Double.parseDouble(txtValor.getText());
-            String resposta = caixa.sacar(vlr);
-            txtMsg.append(resposta + "\n");
-            txtValor.setText(null);
-            txtValor.requestFocus(); //coloca o foco no controle
+            try{
+                String resposta = null;
+                double vlr = Double.parseDouble(txtValor.getText());
+                resposta = caixa.sacar(vlr);
+
+                if(resposta!=null) {
+                    txtMsg.append(resposta + "\n");
+                    txtValor.setText(null);
+                    txtValor.requestFocus(); //coloca o foco no controle
+                }
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(
+                        null,
+                        ex.getMessage(),
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
         }
     }
 }

@@ -28,11 +28,24 @@ public class TelaMovimento2 {
         cmdEntrada.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                double vlr = Double.parseDouble(txtValor.getText());
-                String resposta = caixa.depositar(vlr);
-                txtMsg.append(resposta + "\n");
-                txtValor.setText(null);
-                txtValor.requestFocus(); //coloca o foco no controle
+                try{
+                    String resposta = null;
+                    double vlr = Double.parseDouble(txtValor.getText());
+                    resposta = caixa.depositar(vlr);
+
+                    if(resposta!=null) {
+                        txtMsg.append(resposta + "\n");
+                        txtValor.setText(null);
+                        txtValor.requestFocus(); //coloca o foco no controle
+                    }
+                }catch (Exception ex){
+                    JOptionPane.showMessageDialog(
+                            null,
+                            ex.getMessage(),
+                            "Erro",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                }
 
             }
         });
@@ -48,11 +61,24 @@ public class TelaMovimento2 {
         cmdRetirada.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                double vlr = Double.parseDouble(txtValor.getText());
-                String resposta = caixa.sacar(vlr);
-                txtMsg.append(resposta + "\n");
-                txtValor.setText(null);
-                txtValor.requestFocus(); //coloca o foco no controle
+                try{
+                    String resposta = null;
+                    double vlr = Double.parseDouble(txtValor.getText());
+                    resposta = caixa.sacar(vlr);
+
+                    if(resposta!=null) {
+                        txtMsg.append(resposta + "\n");
+                        txtValor.setText(null);
+                        txtValor.requestFocus(); //coloca o foco no controle
+                    }
+                }catch (Exception ex){
+                    JOptionPane.showMessageDialog(
+                            null,
+                            ex.getMessage(),
+                            "Erro",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                }
 
             }
         });
